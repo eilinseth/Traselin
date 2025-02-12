@@ -1,14 +1,14 @@
 import { useState } from 'react';
-import './App.css';
+import './style/App.css';
 import classNames from 'classnames';
 
 function App() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="w-dvw h-dvh">
+    <div className="w-dvw h-dvh font-[Lora]">
       <nav className="bg-slate-50 flex justify-between h-[9%] items-center max-w-full">
-        <h1 className="text-2xl font-bold mx-[5%] text-sky-500">Traselin</h1>
+        <h1 className="text-2xl font-bold mx-[5%] text-sky-500 font-[Pacifico]"><span className='text-3xl'>T</span>raselin</h1>
         <button
           onClick={() => {
             setIsOpen(!isOpen);
@@ -42,12 +42,12 @@ function App() {
         >
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="p-1 font-semibold rounded-lg mb-10 text-sm bg-red-500 text-white md:hidden "
+            className="fixed p-1 w-[20%] right-6 top-[9px] font-semibold rounded-lg mb-10 text-sm bg-red-500 text-white md:hidden font-[Poppins] "
           >
-            Click To Close
+            X
           </button>
 
-          <a href="#" className="font-medium">
+          <a href="#" className="mt-15 md:mt-0 font-medium">
             About
           </a>
           <a href="#" className="font-medium">
