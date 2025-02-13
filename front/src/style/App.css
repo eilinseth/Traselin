@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+@theme {
+    --color-darkSideBar : rgb(30,40,110);
+}
