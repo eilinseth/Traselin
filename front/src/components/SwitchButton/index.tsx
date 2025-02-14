@@ -7,7 +7,7 @@ export default function SwitchButton() {
   const [isActive, setIsActive] = useState('home');
 
   return (
-    <div className="md:hidden fixed bottom-0 w-full bg-slate-200 h-[9%] flex items-center justify-center ">
+    <div className="md:hidden fixed z-10 bottom-0 w-full bg-slate-200 h-[9%] flex items-center justify-center ">
       <button
         onClick={() => setIsActive('home')}
         className={classNames(
