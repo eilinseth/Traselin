@@ -6,7 +6,7 @@ function App() {
  
 
   return (
-    <div className="w-dvw h-dvh font-[Raleway]">
+    <div className="w-dvw h-dvh font-[Raleway] bg-gray-100">
       <Navbar/>
       <SwitchButton/>
     </div>

@@ -3,13 +3,24 @@ import Community from "../../assets/svg/community.svg"
 import Login from "../../assets/svg/login.svg"
 import Sign from "../../assets/svg/signature.svg"
 import classNames from "classnames";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Navbar (){
     const [isOpen , setIsOpen] = useState(false)
+    const menuRef = useRef<HTMLDivElement | null>(null);
+
+    useEffect(() => {
+      function handleClickOutside(event){
+        if(menuRef.current && !menuRef.current.contains(event.target)){
+          setIsOpen(false)
+        }
+      }
+      document.addEventListener("mousedown",handleClickOutside);
+      return () => removeEventListener("mousedown",handleClickOutside)
+    })
     return(
         <nav className="bg-slate-50 flex justify-between h-[9%] items-center max-w-full">
-        <h1 className="text-2xl font-bold mx-[5%] text-sky-500 font-[Pacifico]"><span className='text-3xl'>T</span>raselin</h1>
+        <h1 className="text-2xl font-bold mx-[5%] text-transparent bg-gradient-to-r from-indigo-500 to-indigo-300 bg-clip-text  font-[Pacifico]"><span className='text-4xl'>T</span>raselin</h1>
         <button
           onClick={() => {
             setIsOpen(!isOpen);
@@ -19,25 +30,25 @@ export default function Navbar (){
           )}
         >
           <span
-            className={classNames(`block w-[75%] h-1 bg-sky-500`, {
+            className={classNames(`block w-[75%] h-1 bg-indigo-500`, {
               'transform origin-top-left rotate-45 transition': isOpen === true,
             })}
           ></span>
           <span
-            className={classNames(`block w-[75%] h-1 bg-sky-500`, {
+            className={classNames(`block w-[75%] h-1 bg-indigo-500`, {
               'scale-0 transform transition': isOpen === true,
             })}
           ></span>
           <span
-            className={classNames(`block w-[75%] h-1 bg-sky-500`, {
+            className={classNames(`block w-[75%] h-1 bg-indigo-500`, {
               'transform origin-bottom-left -rotate-45 transition':
                 isOpen === true,
             })}
           ></span>
         </button>
 
-        <div
-          className={`z-10 fixed top-0 right-0 w-[40%] h-full border-l-2 md:border-none bg-darkSideBar flex flex-col gap-6 md:bg-transparent text-black text-sm p-4 transform transition-transform md:static md:flex-row md:flex md:translate-0 md:items-center md:justify-end md:gap-8 md:mx-[5%] ${
+        <div ref={menuRef}
+          className={`z-10 fixed top-0 right-0 w-[40%] h-full border-l border-indigo-200 md:border-none bg-indigo-600/10 backdrop-blur-sm flex flex-col gap-6 md:bg-transparent text-black text-sm p-4 transform transition-transform md:static md:flex-row md:flex md:translate-0 md:items-center md:justify-end md:gap-8 md:mx-[5%] ${
             isOpen ? 'translate-0' : 'translate-x-full'
           }`}
         >

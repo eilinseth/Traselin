@@ -13,22 +13,26 @@ export default function SwitchButton() {
         className={classNames(
           'w-[50%] border-r-2 border-black flex items-center justify-center h-full cursor-pointer',
           {
-            'bg-sky-400': isActive === 'home',
+            'bg-indigo-400 ': isActive === 'home',
           }
         )}
       >
-        <img src={House} className="w-20 h-7 " />
+        <img src={House} className={classNames("w-20 h-7 ",{
+          "invert" : isActive === 'home'
+        })} />
       </button>
       <button
         onClick={() => setIsActive('search')}
         className={classNames(
           'w-[50%] flex items-center justify-center h-full cursor-pointer',
           {
-            'bg-sky-400': isActive === 'search',
+            'bg-indigo-400': isActive === 'search',
           }
         )}
       >
-        <img src={Search} className="w-20 h-8" />
+        <img src={Search} className={classNames("w-20 h-7 ",{
+          "invert" : isActive === 'search'
+        })} /> 
       </button>
     </div>
   );
