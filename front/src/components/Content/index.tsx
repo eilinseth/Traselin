@@ -1,15 +1,28 @@
 import ArrayContent from '../../json/index.json';
 import ShareIcon from '../../assets/svg/share-arrows.svg';
 import DownloadIcon from '../../assets/svg/download-button.svg';
+import classNames from 'classnames';
 
 export default function Content() {
+  function getRandomColspan() {
+    const colSpan = [
+      'md:col-span-1',
+      'md:col-span-2',
+      'md:col-span-3',
+      'md:col-span-4',
+    ];
+    return colSpan[Math.floor(Math.random() * colSpan.length)];
+  }
+
   return (
     <div className="h-screen ">
-      <div className="container mx-auto w-full pb-[15%] mt-3 p-[4%] grid grid-cols-2 gap-5  justify-center sm:grid-cols-3 md:grid-cols-4 overflow-auto ">
+      <div className="container mx-auto w-full pb-[15%] mt-10 p-[5%] grid grid-cols-2 gap-5  justify-center sm:grid-cols-3 md:grid-cols-4 overflow-auto grid-flow-dense">
         {ArrayContent.map((picture, index) => (
           <div
             key={index}
-            className="h-80 overflow-hidden rounded-lg group relative"
+            className={classNames(
+              `h-80 overflow-hidden rounded-lg group relative ${getRandomColspan()}`
+            )}
           >
             <a href="#" className="">
               <img
