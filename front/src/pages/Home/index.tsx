@@ -16,7 +16,7 @@ export default function Content() {
 
   return (
     <div className="h-screen ">
-      <div className="container mx-auto w-full pb-[15%] mt-10 p-[5%] grid md:grid-cols-6 gap-5 md:gap-1  justify-center sm:grid-cols-3 grid-cols-2 overflow-auto grid-flow-dense">
+      <div className="container mx-auto w-full pb-[15%] mt-10 p-[5%] md:mt-5 grid md:grid-cols-6 gap-5 md:gap-1  justify-center sm:grid-cols-3 grid-cols-2 overflow-auto grid-flow-dense">
         {ArrayContent.map((picture, index) => (
           <div
             key={index}

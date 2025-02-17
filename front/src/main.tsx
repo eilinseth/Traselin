@@ -2,6 +2,7 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App.tsx'
 import WebFont from 'webfontloader'
+import { BrowserRouter, Route, Routes } from 'react-router'
 
 WebFont.load({
   google : {
@@ -10,7 +11,11 @@ WebFont.load({
 })
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <App />
-  </StrictMode>,
+  <BrowserRouter> 
+    <StrictMode>
+      <Routes>
+        <Route path="*" element={<App />} />
+      </Routes>
+    </StrictMode>
+  </BrowserRouter>
 )
