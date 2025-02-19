@@ -27,9 +27,9 @@ export default function Navbar() {
         }
       } else {
         if (navbarRef.current?.classList) {
-          navbarRef.current.classList.add('bg-slate-100');
-          navbarRef.current.classList.remove('bg-white/50');
+          navbarRef.current.classList.remove('bg-white/70');
           navbarRef.current.classList.remove('backdrop-blur-md');
+          navbarRef.current.classList.add('bg-slate-100');
         }
       }
     }

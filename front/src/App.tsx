@@ -6,7 +6,7 @@ import MyRoutes from './routes';
 
 function App() {
   return (
-    <div className="w-dvw min-h-screen font-[Raleway] bg-gray-100 relative z-0 scroll-smooth">
+    <div className="w-dvw min-h-screen font-[Raleway] bg-gray-100 relative z-0 ">
       <Navbar />
       <MyRoutes />
       <SwitchButton />
