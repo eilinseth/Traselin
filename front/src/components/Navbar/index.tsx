@@ -9,6 +9,8 @@ import { NavLink } from 'react-router-dom';
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
+  const navbarRef = useRef<HTMLDivElement | null>(null);
+  const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -16,12 +18,44 @@ export default function Navbar() {
         setIsOpen(false);
       }
     }
+    function handlescroll() {
+      if (window.scrollY > 50) {
+        if (navbarRef.current?.classList) {
+          navbarRef.current.classList.add('bg-white/70');
+          navbarRef.current.classList.add('backdrop-blur-md');
+          navbarRef.current.classList.remove('bg-slate-100');
+        }
+      } else {
+        if (navbarRef.current?.classList) {
+          navbarRef.current.classList.add('bg-slate-100');
+          navbarRef.current.classList.remove('bg-white/50');
+          navbarRef.current.classList.remove('backdrop-blur-md');
+        }
+      }
+    }
+    function textScrolled() {
+      setScrolled(window.scrollY > 50);
+    }
     document.addEventListener('mousedown', handleClickOutside);
-    return () => removeEventListener('mousedown', handleClickOutside);
+    window.addEventListener('scroll', handlescroll);
+    window.addEventListener('scroll', textScrolled);
+    return () => {
+      window.removeEventListener('scroll', handlescroll);
+      document.removeEventListener('mousedown', handleClickOutside);
+      window.removeEventListener('scroll', textScrolled);
+    };
   });
   return (
-    <nav className="bg-slate-100 flex justify-between h-[9%] items-center max-w-full fixed top-0 w-full z-19">
-      <NavLink to="/*" className="cursor-pointer text-2xl font-bold w-[20%] md:w-[15%] lg:w-[10%]  mx-[5%] text-transparent bg-gradient-to-r from-indigo-500 to-indigo-200 bg-clip-text  font-[Pacifico]">
+    <nav
+      ref={navbarRef}
+      className="bg-slate-100 flex justify-between h-[9%] items-center max-w-full fixed top-0 w-full z-19"
+    >
+      <NavLink
+        to="/*"
+        className={` ${
+          scrolled ? 'mix-blend-difference' : 'mix-blend-normal'
+        } logo drop-shadow-md  cursor-pointer text-2xl font-bold w-[20%] md:w-[15%] lg:w-[10%]  mx-[5%] text-transparent bg-gradient-to-r from-indigo-500 to-indigo-200 bg-clip-text  font-[Pacifico]`}
+      >
         <span className="text-4xl">T</span>raselin
       </NavLink>
       <button
@@ -63,30 +97,30 @@ export default function Navbar() {
           X
         </button>
 
-        <NavLink to="/about"
-          
+        <NavLink
+          to="/about"
           className="flex gap-3 items-center md:justify-center  md:w-fit md:pr-3 mt-15 md:mt-0 bg-slate-500  text-white font-semibold py-1 px-2 rounded-md"
         >
           <img src={About} className="w-5 h-5 invert" />
           <p>About</p>
         </NavLink>
-        <NavLink to="/community"
-          
+        <NavLink
+          to="/community"
           className="bg-red-700 flex gap-3 md:justify-center  md:w-fit md:gap-2 items-center text-white font-semibold py-1 px-2 rounded-md"
         >
           <img src={Community} className="w-5 h-5 invert" />
           <p>Community</p>
         </NavLink>
-        <NavLink to="/login"
-          
+        <NavLink
+          to="/login"
           className="bg-green-700 flex gap-3 items-center md:justify-center  md:w-fit text-white font-semibold py-1 px-2 rounded-md"
         >
           <img src={Login} className="w-5 h-5 invert" />
 
           <p>Login</p>
         </NavLink>
-        <NavLink to="/register"
-          
+        <NavLink
+          to="/register"
           className="bg-gray-700 flex gap-3 items-center md:justify-center  md:w-fit text-white font-semibold py-1 px-2 rounded-md"
         >
           <img src={Sign} className="w-5 h-5 invert" />
