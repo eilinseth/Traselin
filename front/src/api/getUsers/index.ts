@@ -8,6 +8,7 @@ export const getUsers = async():Promise<Users> =>{
             console.log("Failed to fetch data")
             throw new Error
         }
+        
         return res.data
     }catch(error){
         throw new Error(`${error}`)

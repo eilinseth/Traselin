@@ -1,16 +1,23 @@
 import axios from "axios";
 import { LoginBody } from "../../types";
 
-const Login = async(data:LoginBody):Promise<void> => {
+export const userLogin = async(data:LoginBody):Promise<void> => {
     try{
-        await axios({
+        
+        const res = await axios({
             method : "POST",
             url : "http://localhost:8080/login",
-            data
+            data ,
+            headers : {
+                "Content-Type" : "application/json"
+            }
         })
-    }catch(error){
-        throw new Error(`${error}`)
+        
+        return res.data
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    }catch(error:any){
+        console.error("Login Error ", error.response)
+        throw new Error(error.response?.data?.message)
     }
 }
 
-export default Login

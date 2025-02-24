@@ -3,8 +3,14 @@ import Home from '../pages/Home';
 import Search from '../pages/Search';
 import Login from '../pages/Login';
 import Register from '../pages/Register';
+import React,{FC} from 'react';
 
-export default function MyRoutes() {
+interface myProps  {
+  isLogin:boolean,
+  setLogin : React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const MyRoutes: FC<myProps> = ({isLogin,setLogin}) => {
   return (
     <Routes>
       <Route path="/*" element={<Home />} />
@@ -14,3 +20,5 @@ export default function MyRoutes() {
     </Routes>
   );
 }
+
+export default MyRoutes

@@ -5,8 +5,13 @@ import Sign from '../../assets/svg/signature.svg';
 import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
+import { FC } from 'react';
 
-export default function Navbar() {
+interface props {
+  isLogin: boolean;
+}
+
+const Navbar: FC<props> = ({ isLogin }) => {
   const [isOpen, setIsOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement | null>(null);
   const navbarRef = useRef<HTMLDivElement | null>(null);
@@ -120,6 +125,14 @@ export default function Navbar() {
           <p>Login</p>
         </NavLink>
         <NavLink
+          to="/login"
+          className="hidden bg-slate-700 flex gap-3 items-center md:justify-center  md:w-fit text-white font-semibold py-1 px-2 rounded-md"
+        >
+          <img src={Login} className="w-5 h-5 invert" />
+
+          <p>Logout</p>
+        </NavLink>
+        <NavLink
           to="/register"
           className="bg-gray-700 flex gap-3 items-center md:justify-center  md:w-fit text-white font-semibold py-1 px-2 rounded-md"
         >
@@ -130,4 +143,6 @@ export default function Navbar() {
       </div>
     </nav>
   );
-}
+};
+
+export default Navbar;

@@ -94,7 +94,7 @@ const login = async (req:Request,res:Response):Promise<void> => {
             console.log("Login Failed")
             res.status(401).json({
                 status : 401,
-                message : "Invalid credentials"
+                message : "Wrong password"
             })
            }
         }

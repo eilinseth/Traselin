@@ -20,6 +20,6 @@ export interface UserBody {
 }
 
 export interface LoginBody {
-    userOrEMail : string,
+    userOrEmail : string,
     password : string
 }

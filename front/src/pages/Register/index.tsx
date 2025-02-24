@@ -1,9 +1,8 @@
-import { NavLink } from "react-router-dom"
+import { NavLink,useNavigate } from "react-router-dom"
 import {useForm } from "react-hook-form"
 import { UserBody } from "../../types"
-import {getUsers} from "../../api/getUsers"
 import {userRegister} from "../../api/Register"
-import { useQuery,useMutation,useQueryClient } from "react-query"
+import { useMutation,useQueryClient } from "react-query"
  
 export default function Register (){
     const {
@@ -12,16 +11,14 @@ export default function Register (){
         reset,
         formState : {errors}
     } = useForm<UserBody>()
-
+    const navigate = useNavigate()
     const queryClient = useQueryClient()
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const query = useQuery('users',getUsers)
     const mutation = useMutation(userRegister,{
         onSuccess : () =>{
             queryClient.invalidateQueries('users')
             reset()
             alert("Register Success")
-            
+            navigate("/login")
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         },onError: (error:any) =>{
             alert(error.message)
