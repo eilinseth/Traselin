@@ -27,7 +27,7 @@ const register = async (req:Request,res:Response):Promise<void> => {
     try {
         const {username,email,password} = req.body
         console.log(req.body)
-        if(!username || !email || !password){
+        if(!username && !email && !password){
              res.status(400).json({
                 status : "400",
                 message : "Bad Request - Missing fields"

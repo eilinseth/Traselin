@@ -3,8 +3,14 @@ import { useForm } from 'react-hook-form';
 import { useMutation, useQueryClient } from 'react-query';
 import { LoginBody } from '../../types';
 import {userLogin} from "../../api/Login"
+import React,{FC} from "react"
 
-export default function Login() {
+interface props {
+    isLogin :boolean
+    setLogin : React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const Login:FC<props> = ({isLogin,setLogin}) => {
     const {
         register,
         reset,
@@ -19,6 +25,7 @@ export default function Login() {
             queryClient.invalidateQueries('users')
             reset()
             alert("Login Success")
+            setLogin(!isLogin)
             navigate("/*")
         },
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -53,7 +60,7 @@ export default function Login() {
           />
           {errors.password && <p className='text-red-500'>{errors.password.message}</p>}
         </div>
-        <button
+        <button 
           className="cursor-pointer p-2 w-40 bg-green-500 mt-5 rounded-xl text-white font-bold border-2 border-black"
           type="submit"
         >

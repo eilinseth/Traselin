@@ -9,7 +9,7 @@ function App() {
   const [isLogin,setIsLogin] = useState(false)
   return (
     <div className="w-dvw min-h-screen font-[Raleway] bg-gray-100 relative z-0 ">
-      <Navbar isLogin={isLogin}  />
+      <Navbar isLogin={isLogin} setLogin ={() => setIsLogin(!isLogin)} />
       <MyRoutes isLogin={isLogin} setLogin={() => setIsLogin(!isLogin)}/>
       <SwitchButton />
     </div>
