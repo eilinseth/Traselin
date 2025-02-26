@@ -85,13 +85,12 @@ const login = async (req:Request,res:Response):Promise<void> => {
         }else{
            const match = await bcrypt.compare(password , userMail.password)
            if(match){
-            console.log("Login Success")
+            req.session.user = {id : userMail._id.toString() , username : userMail.username}
             res.status(200).json({
                 status:200,
                 message : "Login Success"
             })
            }else{
-            console.log("Login Failed")
             res.status(401).json({
                 status : 401,
                 message : "Wrong password"
@@ -107,4 +106,20 @@ const login = async (req:Request,res:Response):Promise<void> => {
     }
 }
 
-export {getUsers,register,login}
+const checkAuth = async (req:Request,res:Response) =>{
+    try{
+        if(req.session.user){
+            res.json({isAuthenticated : true, user:req.session.user})
+        }else {
+            res.status(401).json({
+                isAuthenticated : false,
+                message : "Not Authenticated"
+            })
+        }
+    }catch(error){
+        console.error(`${error}`)
+        res.status(500).json({message:"Internal server error"})
+    }
+}
+
+export {getUsers,register,login,checkAuth}
