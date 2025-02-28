@@ -125,11 +125,11 @@ const checkAuth = async (req:Request,res:Response) =>{
 
 const logout = async (req:Request,res:Response):Promise<void> =>{
     try{
-        
+        req.session.destroy(() => res.json({message:"Logged Out"}))
     }catch(error){
         console.error(`${error}`)
         res.status(500).json({message:"Internal server error"})
     }
 }
 
-export {getUsers,register,login,checkAuth}
+export {getUsers,register,login,checkAuth,logout}

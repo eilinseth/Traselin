@@ -6,6 +6,9 @@ import classNames from 'classnames';
 import { useEffect, useRef, useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import React, { FC } from 'react';
+import { userLogout } from '../../api/Logout';
+import axios from 'axios';
+import { useMutation } from 'react-query';
 
 interface props {
   isLogin: boolean;
@@ -17,8 +20,40 @@ const Navbar: FC<props> = ({ isLogin, setLogin }) => {
   const menuRef = useRef<HTMLDivElement | null>(null);
   const navbarRef = useRef<HTMLDivElement | null>(null);
   const [scrolled, setScrolled] = useState(false);
+  const isFetched = useRef(false)
+
+
+  const mutation = useMutation(userLogout,{
+    onSuccess : () => {
+      alert('Logged Out')
+    },
+  })
+
+  function loggedOut (){
+    mutation.mutate()
+    setLogin(false)
+  }
 
   useEffect(() => {
+    if (isFetched.current) return;
+    isFetched.current = true; 
+
+    async function checkAuth() {
+      try{
+        const res = await axios.get("http://localhost:8080/checkAuth",{withCredentials:true})
+        if(!res){
+          setLogin(false)
+        }
+        console.log(res.data)
+        setLogin(true)
+        
+      }catch(error){
+        console.error(`${error}`)
+      }
+    }
+    
+    checkAuth();
+
     function handleClickOutside(event: MouseEvent) {
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         setIsOpen(false);
@@ -50,7 +85,10 @@ const Navbar: FC<props> = ({ isLogin, setLogin }) => {
       document.removeEventListener('mousedown', handleClickOutside);
       window.removeEventListener('scroll', textScrolled);
     };
-  });
+
+    
+  },[]);
+  
   return (
     <nav
       ref={navbarRef}
@@ -119,9 +157,9 @@ const Navbar: FC<props> = ({ isLogin, setLogin }) => {
         </NavLink>
         {isLogin ? (
           <NavLink
-            onClick={() => setLogin(!isLogin)}
+            onClick={loggedOut}
             to="/*"
-            className="bg-slate-700 flex gap-3 items-center md:justify-center  md:w-fit text-white font-semibold py-1 px-2 rounded-md"
+            className="bg-blue-700 flex gap-3 items-center md:justify-center  md:w-fit text-white font-semibold py-1 px-2 rounded-md"
           >
             <img src={Login} className="w-5 h-5 invert" />
 

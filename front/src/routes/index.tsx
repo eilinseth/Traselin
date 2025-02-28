@@ -17,6 +17,7 @@ const MyRoutes: FC<myProps> = ({isLogin,setLogin}) => {
       <Route path="/search" element={<Search />} />
       <Route path='/login' element={<Login isLogin={isLogin}  setLogin={setLogin} />} />
       <Route path='/register' element={<Register/>}/>
+      
     </Routes>
   );
 }

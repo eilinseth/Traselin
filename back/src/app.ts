@@ -22,7 +22,7 @@ app.use(express.json())
 app.use(session({
     resave:false,
     saveUninitialized:true,
-    cookie : {secure : false,httpOnly:true,maxAge: 1000 * 60 * 60 * 24},
+    cookie : {secure : false,httpOnly:true,maxAge: 1000 * 60 * 60 * 24,sameSite:"lax"},
     secret : process.env.SESSION_SECRET,
     store : MongoStore.create({mongoUrl:mongoURI}),
     
