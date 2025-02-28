@@ -10,7 +10,8 @@ export const userLogin = async(data:LoginBody):Promise<void> => {
             data ,
             headers : {
                 "Content-Type" : "application/json"
-            }
+            },
+            withCredentials:true,
         })
         
         return res.data

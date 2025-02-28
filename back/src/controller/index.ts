@@ -85,7 +85,8 @@ const login = async (req:Request,res:Response):Promise<void> => {
         }else{
            const match = await bcrypt.compare(password , userMail.password)
            if(match){
-            req.session.user = {id : userMail._id.toString() , username : userMail.username}
+               req.session.user = {id : userMail._id.toString() , username : userMail.username}
+               console.log(req.session)
             res.status(200).json({
                 status:200,
                 message : "Login Success"
@@ -116,6 +117,15 @@ const checkAuth = async (req:Request,res:Response) =>{
                 message : "Not Authenticated"
             })
         }
+    }catch(error){
+        console.error(`${error}`)
+        res.status(500).json({message:"Internal server error"})
+    }
+}
+
+const logout = async (req:Request,res:Response):Promise<void> =>{
+    try{
+        
     }catch(error){
         console.error(`${error}`)
         res.status(500).json({message:"Internal server error"})
